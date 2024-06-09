@@ -5,7 +5,7 @@ from torchvision import transforms as T
 from torch.utils.data import DataLoader
 import time 
 from datetime import datetime
-from torchvision.models import vit_b_16, convnext_base, swin_v2_b, densenet121, maxvit_t, efficientnet_b4
+from torchvision.models import vit_b_16, densenet121, maxvit_t, efficientnet_b4
 import os
 from dataset import XrayDataset, Dataprep
 from torchmetrics.classification import MultilabelAUROC
@@ -14,10 +14,10 @@ from utils import return_seconds
 
 classes = ['Atelectasis', 'Consolidation', 'Infiltration', 'Pneumothorax', 'Edema', 'Emphysema', 'Fibrosis', 'Effusion', 'Pneumonia', 'Pleural_Thickening', 'Cardiomegaly', 'Nodule', 'Mass', 'Hernia']
 
-BASE_PATH = '/mnt/disk2/comp_aided/images/'
-CSV_PATH = '/mnt/disk2/comp_aided/Data_Entry_2017_v2020.csv'
-TRAIN_LIST_PATH = '/mnt/disk2/comp_aided/train_val_list.txt'
-TEST_LIST_PATH = '/mnt/disk2/comp_aided/test_list.txt'
+BASE_PATH = './images/'
+CSV_PATH = './Data_Entry_2017_v2020.csv'
+TRAIN_LIST_PATH = './train_val_list.txt'
+TEST_LIST_PATH = './test_list.txt'
 
 df_train, df_val, df_test = Dataprep(classes).prep(BASE_PATH=BASE_PATH, CSV_PATH=CSV_PATH, 
                         TRAIN_LIST_PATH=TRAIN_LIST_PATH, TEST_LIST_PATH=TEST_LIST_PATH, train_val_split_ratio=0.1)
