@@ -10,10 +10,10 @@ from torchmetrics.classification import MultilabelAUROC, MultilabelAccuracy
 
 classes = ['Atelectasis', 'Consolidation', 'Infiltration', 'Pneumothorax', 'Edema', 'Emphysema', 'Fibrosis', 'Effusion', 'Pneumonia', 'Pleural_Thickening', 'Cardiomegaly', 'Nodule', 'Mass', 'Hernia']
 
-BASE_PATH = '/mnt/disk2/comp_aided/images/'
-CSV_PATH = '/mnt/disk2/comp_aided/Data_Entry_2017_v2020.csv'
-TRAIN_LIST_PATH = '/mnt/disk2/comp_aided/train_val_list.txt'
-TEST_LIST_PATH = '/mnt/disk2/comp_aided/test_list.txt'
+BASE_PATH = './images/'
+CSV_PATH = './Data_Entry_2017_v2020.csv'
+TRAIN_LIST_PATH = './train_val_list.txt'
+TEST_LIST_PATH = './test_list.txt'
 
 _, _ , df_test = Dataprep(classes).prep(BASE_PATH=BASE_PATH, CSV_PATH=CSV_PATH, 
                                                    TRAIN_LIST_PATH=TRAIN_LIST_PATH, TEST_LIST_PATH=TEST_LIST_PATH)
@@ -31,7 +31,7 @@ testloader = DataLoader(test_set,batch_size=BATCH_SIZE,shuffle=False)
 
 model = vit_b_16()
 model.heads = nn.Sequential(nn.Linear(768,len(classes)))
-model.load_state_dict(torch.load('/mnt/disk2/comp_aided/checkpoints/29_04_2024_02_13_02_VisionTransformer_epoch_1.pth'))
+model.load_state_dict(torch.load('./checkpoints/29_04_2024_02_13_02_VisionTransformer_epoch_1.pth'))
 model.eval()
 model.to(device)
 true_threshold = 0.75 
